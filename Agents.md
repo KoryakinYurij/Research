@@ -1,140 +1,192 @@
 # agent.md
-## Agent Architecture & Design Instructions
+## Agent Operational Contract
 
-### Purpose of this file
+This file defines **mandatory, enforceable rules** for all agents
+created, reviewed, or evolved in this repository.
 
-This document defines the **architectural rules, design philosophy, and constraints** for all agents created, analyzed, or evolved inside this repository.
-
-This is **not a prompt**.
-It is a **persistent instruction file** that must be respected on every run.
-
-All agents MUST align with principles derived from **Agentic Design Patterns**.
+This is NOT a prompt.
+This is a **behavioral and architectural contract** applied on every run.
 
 ---
 
-## Core Design Philosophy
+## Mandatory Reference
 
-### 1. Agents are goal-driven systems, not prompts
+The repository contains the file:
 
-Each agent must implement a full **agentic loop**:
+**Agentic_Design_Patterns.pdf**
 
-- Perceive context and inputs  
-- Plan actions before execution  
-- Act using reasoning and/or tools  
-- Reflect on outcomes  
-- Decide to continue, refine, or stop  
+This document is the **PRIMARY and MANDATORY source of truth** for:
+- agent architecture
+- agent behavior
+- agent composition
+- agent evolution
 
-Agents that only generate output without planning or reflection are invalid.
-
----
-
-### 2. Prefer specialization over generalization
-
-Complex goals must be solved using **multiple specialized agents**, not a single monolithic one.
-
-Each agent must:
-- Have one clear and narrow mission
-- Own a single dominant responsibility
-- Be composable with other agents
-
-If an agent grows beyond one responsibility, it must be split.
+All agents MUST be explicitly aligned with patterns defined in this document.
+Agents that contradict these patterns are INVALID.
 
 ---
 
-### 3. Mandatory alignment with Agentic Design Patterns
+## Decision Priority Order
 
-Every agent must explicitly embody **at least one** agentic design pattern, such as:
+When instructions or signals conflict, agents MUST follow this order:
 
-- Planning  
-- Reflection  
-- Exploration & Discovery  
-- Multi-Agent Collaboration  
-- ReAct  
-- Guardrails  
-
-The chosen pattern(s) must be stated inside the agent file.
+1. `agent.md` (this file)
+2. Explicit user instructions in the current task
+3. Meta-agent audit outputs (advisory but high priority)
+4. Repository state (existing agents and files)
+5. General model knowledge or defaults
 
 ---
 
-## Agent Classes
+## Conditions for Creating a New Agent
 
-### Research Agents
+A new agent MAY be created ONLY if ALL conditions below are met:
 
-Research agents follow the **Exploration & Discovery** pattern.
+- The agent has exactly ONE clear, explicit mission
+- The mission cannot be reasonably handled by an existing agent
+- The agent implements a full agentic loop
+- At least one Agentic Design Pattern is explicitly applied and mapped
 
-They must:
-- Plan research steps before acting  
-- Actively seek new information  
-- Clearly separate:
-  - verified facts
-  - assumptions
-  - hypotheses  
-- Perform self-reflection or peer review  
-- Produce synthesized insights, not raw dumps  
-
-Research agents must be safe for repeated execution and produce fresh results each run.
+Failure to meet ANY condition prohibits agent creation.
 
 ---
 
-### Meta / Agent-Creation Agents
+## Mandatory Agentic Loop
 
-Meta agents operate under **Reflection and Planning** patterns.
+Every agent MUST explicitly define all five stages:
 
-They must:
-- Analyze existing agents for design or pattern violations  
-- Identify missing capabilities or gaps  
-- Propose improvements or new agents when justified  
-- Never modify agents directly without explicit reasoning  
+1. Perception  
+2. Planning  
+3. Action  
+4. Reflection  
+5. Stop / Continue decision  
 
-Meta agents exist to **improve the agent ecosystem**, not to perform domain work.
+Agents missing any stage are INVALID.
+
+---
+
+## Mandatory Pattern Mapping
+
+Each agent MUST include a section titled:
+
+### Design Pattern Mapping
+
+For EACH declared pattern:
+- Pattern name (as defined in Agentic_Design_Patterns.pdf)
+- Which agentic loop stage(s) it governs
+- How the pattern is concretely implemented
+- What would constitute a violation of this pattern
+
+Listing pattern names without concrete mapping is INVALID.
+
+---
+
+## Research Agents — Required Pipeline
+
+Research agents MUST follow this minimal pipeline:
+
+1. Problem framing  
+2. Exploration (information gathering)  
+3. Evidence grouping  
+4. Reflection / critique  
+5. Synthesis  
+
+Stages MAY be iterated or partially merged ONLY IF:
+- explicitly justified in the agent file
+- the justification is written before execution
+
+Research outputs MUST clearly separate:
+- Verified facts
+- Assumptions
+- Hypotheses
+
+---
+
+## Meta / Agent-Creation Agents — Required Behavior
+
+Meta agents operate as **auditors and designers**, not executors.
+
+They MUST:
+- Audit agents against this contract
+- Detect violations, drift, or redundancy
+- Propose concrete improvements or new agents
+- Justify proposals using Agentic Design Patterns
+
+Meta agents MUST NOT modify other agents directly.
+
+### Mandatory Meta-Agent Output Format
+
+Meta-agent outputs MUST include:
+- Agents reviewed
+- Violations found (if any)
+- Severity (low / medium / high)
+- Recommended action
+- Rationale
+
+Unstructured commentary is INVALID.
 
 ---
 
 ## Agent File Requirements
 
-Each agent file must include:
+Each agent file MUST include:
 
-- Mission  
-- Agentic loop description  
-- Design pattern(s) used  
-- Inputs  
-- Outputs  
-- Stop conditions  
-- Failure modes  
+- Mission
+- Agentic loop (all five stages)
+- Design Pattern Mapping
+- Inputs
+- Outputs
+- Stop conditions
+- Failure modes
 
-Agents without explicit stop conditions are invalid.
-
----
-
-## Operational Constraints
-
-- Do not create agents that require constant manual tuning  
-- Avoid over-configuration and unnecessary abstraction  
-- Assume agents run asynchronously and repeatedly  
-- Filenames must always be unique  
-- All outputs must be deterministic and merge-safe  
-
-Messy systems combined with agents are unacceptable.
+Missing ANY section makes the agent INVALID.
 
 ---
 
-## Evolution Rules
+## Drift Prevention Rules
 
-- Improve systems through iteration, not replacement  
-- Prefer adding new specialized agents over expanding existing ones  
-- Reflection must precede any evolution or refactor  
-- Human oversight is allowed but not required at every step  
+Agents MUST NOT:
+- Expand their mission over time
+- Accumulate secondary responsibilities
+- Introduce hidden configuration or implicit state
+
+If new capability is needed:
+- propose a NEW agent
+- or deprecate an existing one
 
 ---
 
-## Final Note
+## Deprecation Rules
 
-Agents in this repository are treated as **software systems**, not conversations.
+Agents MAY be marked as **deprecated** if:
+- their mission is superseded
+- they duplicate another agent
+- they no longer align with patterns
 
-Architectural clarity, explicit reasoning, and accountability are mandatory.
+Deprecated agents MUST:
+- remain in the repository
+- be explicitly labeled as deprecated
+- NOT be silently removed
 
-Build agents that are:
-- understandable  
-- composable  
-- auditable  
-- evolvable  
+---
+
+## Execution Constraints
+
+- Agents must be safe for repeated execution
+- Filenames MUST be unique
+- Outputs MUST be deterministic and merge-safe
+- No agent may require manual tuning to function
+
+---
+
+## Agent Validity Check
+
+An agent is considered VALID ONLY IF:
+
+- All required sections are present
+- All five agentic loop stages are defined
+- At least one pattern is mapped concretely
+- No drift rules are violated
+
+If validity cannot be verified from the agent file,
+the agent is treated as INVALID.
