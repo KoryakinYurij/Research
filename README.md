@@ -30,12 +30,22 @@ This toolkit is grounded in the methodologies defined in:
 **`Agentic_Design_Patterns.pdf`** (based on the work by Antonio Gulli).
 *Concepts covered: Reflection, Planning, Multi-Agent Consensus, Model Context Protocol (MCP), Guardrails.*
 
-## Getting Started
+## Workflow: Build vs. Run
 
-1.  **Read `Agents.md`**: Understand the rules. Ignorance of the contract renders an agent invalid.
-2.  **Copy `TEMPLATE_AGENT.md`**: Start your new agent file.
-3.  **Map your Patterns**: explicitly map your agent's behavior to the Design Patterns.
-4.  **Run Meta-Audit**: Use a Meta-Agent to audit your definition against the contract.
+### 🏗️ Build Mode (Architecting)
+**Goal**: Create new agents.
+1.  **Read `Agents.md`** & **`TOOLS.md`**.
+2.  **Copy `TEMPLATE_AGENT.md`**.
+3.  Define the Agent's Mission, Loop, and Tools.
+4.  **Run Meta-Audit**: Use `Meta_Architect.md` to validate your new file.
+
+### 🚀 Run Mode (Executing)
+**Goal**: Solve a user problem.
+1.  **Start with `Manager_Agent.md`**: Give it the User Goal.
+2.  **Execute the Plan**: The Manager produces `artifact_project_plan.md`.
+3.  **Run the Chain**: Manually (or via script) run each agent listed in the plan sequentially.
+   - *Agent A* runs -> outputs `artifact_A.md`.
+   - *Agent B* runs -> reads `artifact_A.md` -> outputs `artifact_B.md`.
 
 ## Reference Examples
 To see these concepts in action, check the **Reference Implementations**:

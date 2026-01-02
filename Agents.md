@@ -46,6 +46,7 @@ A new agent MAY be created ONLY if ALL conditions below are met:
 - The mission cannot be reasonably handled by an existing agent
 - The agent implements a full agentic loop
 - At least one Agentic Design Pattern is explicitly applied and mapped
+- **All tools used are listed in `TOOLS.md`**
 
 Failure to meet ANY condition prohibits agent creation.
 
