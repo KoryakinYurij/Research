@@ -46,6 +46,7 @@ A new agent MAY be created ONLY if ALL conditions below are met:
 - The mission cannot be reasonably handled by an existing agent
 - The agent implements a full agentic loop
 - At least one Agentic Design Pattern is explicitly applied and mapped
+- **All tools used are listed in `TOOLS.md`**
 
 Failure to meet ANY condition prohibits agent creation.
 
@@ -143,6 +144,34 @@ Missing ANY section makes the agent INVALID.
 
 ---
 
+## Simulation & Emulation Protocols (New)
+
+These rules apply specifically when a single LLM (e.g., Jules) simulates multiple agents sequentially.
+
+### 1. Persona Isolation ("Simulated Amnesia")
+When operating as Agent X:
+- You MUST NOT access knowledge, context, or reasoning from previous agents UNLESS it is explicitly passed via **defined Inputs**.
+- You act as if you have just been spun up for this specific task.
+- "Leaking" context from Agent A to Agent B without a file transfer is a **Critical Violation**.
+
+### 2. Handoff Protocol (Artifact-Based Communication)
+Agents DO NOT communicate via chat history. They communicate via **Artifacts**.
+- **Agent A** writes output to a file (e.g., `artifact_A.md`).
+- **Agent B** reads `artifact_A.md` as its explicit Input.
+- If the file does not exist, Agent B cannot function.
+
+### 3. Structured Output Enforcement
+To ensure Handoffs work, every agent MUST output data in a **Structured Block** at the end of its execution:
+
+```markdown
+# [Agent Name] Output Artifact
+- **Status**: [Success/Failure]
+- **Key Findings**: ...
+- **Next Steps**: ...
+```
+
+---
+
 ## Drift Prevention Rules
 
 Agents MUST NOT:
@@ -187,6 +216,7 @@ An agent is considered VALID ONLY IF:
 - All five agentic loop stages are defined
 - At least one pattern is mapped concretely
 - No drift rules are violated
+- **Persona Isolation and Handoff protocols are defined**
 
 If validity cannot be verified from the agent file,
 the agent is treated as INVALID.
