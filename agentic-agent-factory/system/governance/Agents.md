@@ -208,6 +208,22 @@ Deprecated agents MUST:
 
 ---
 
+## Universal Failure Protocol
+
+If an agent encounters a **Critical Failure** (Mission Impossible):
+1. It MUST STOP execution immediately.
+2. It MUST write a Failure Artifact instead of the standard output:
+   ```markdown
+   # [Agent Name] Output Artifact
+   - **Status**: FAILURE
+   - **Reason**: [Clear explanation]
+   - **Recovery**: [Suggestion if any]
+   ```
+3. The System (Jules) MUST DETECT this `FAILURE` status and **ABORT** the sequential chain.
+4. Subsequent agents MUST check their Input Artifact for `Status: SUCCESS` before proceeding.
+
+---
+
 ## Agent Validity Check
 
 An agent is considered VALID ONLY IF:

@@ -28,7 +28,9 @@ Decompose a high-level User Goal into a sequential execution plan using availabl
 **Strategy:**
 1. Analyze the User Goal.
 2. Identify which available agents have the skills to solve parts of the goal.
-3. Determine the dependency order (e.g., Fact Finder must run before Judge).
+3. Determine the dependency order.
+   - Ensure Agent N+1 explicitly requires the artifact from Agent N.
+   - If a step is conditional, note it (though currently supported execution is linear, the plan should reflect logic).
 4. Write the `project_plan.md`.
 
 ### 2.3 Action

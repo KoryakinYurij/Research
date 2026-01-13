@@ -30,12 +30,18 @@ Analyze the definition files of other agents to ensure strictly compliant with t
 3. Verify "Design Pattern Mapping" is not just a list, but contains concrete implementation details.
 4. Check for "Drift Prevention" violations (e.g., hidden state, multiple missions).
 5. Verify "Emulation Protocols" (Persona Isolation & Handoffs) are defined.
+6. **Blocking Check**: Identify "Critical Violations" that make the agent dangerous or broken:
+   - Missing `Agents.md` Loop Stages.
+   - Missing `Persona Isolation` compliance.
+   - Missing `Structured Output` definition.
+   - **Tool Violation**: Usage of any tool NOT explicitly listed in `TOOLS.md`.
 
 ### 2.3 Action
 **Execution Flow:**
 - Parse the target Markdown file.
 - For each requirement in `Agents.md`, assign a Pass/Fail status.
-- Generate a structured Audit Report.
+- Assign a **Severity** to every violation (LOW or HIGH/BLOCKER).
+- Generate a structured Audit Report with explicit "Blocking Violations" check.
 
 ### 2.4 Reflection
 **Self-Correction Mechanism:**
@@ -70,14 +76,14 @@ Analyze the definition files of other agents to ensure strictly compliant with t
 ### Output Schema
 ```markdown
 # Audit Report: [Agent Name]
-- **Verdict**: [VALID / INVALID]
-- **Severity**: [Low/Medium/High]
+- **Verdict**: [VALID / INVALID / NEEDS_REVIEW]
+- **Blocking Violations**: [Yes/No]
 
-## Violations
+## Critical Violations (Must Fix)
 1. [Clause from Agents.md]: [Description of violation]
 
-## Recommendations
-- [Specific actionable fix]
+## Warnings (Optional)
+- [Improvement suggestion]
 ```
 
 ---
